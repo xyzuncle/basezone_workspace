@@ -1,14 +1,17 @@
 package com.kq.feign.service;
 
 import com.kq.common.domain.User;
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-public class FeignService {
+@FeignClient(value = "hello-service",fallback = FaceBackService.class)
+public interface FeignService {
 
-    public void toSay(){
-        User user = new User();
-        user.setName("23");
-        System.out.println(user.getName());
+    @RequestMapping(value = "feigen/say2",method = RequestMethod.GET)
+    public String say2();
 
 
-    }
+
+
 }

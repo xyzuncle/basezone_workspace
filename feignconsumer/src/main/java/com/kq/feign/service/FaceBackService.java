@@ -1,4 +1,4 @@
-package config;
+package com.kq.feign.service;
 
 
 import com.kq.common.service.BaseService;
