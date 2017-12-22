@@ -18,6 +18,7 @@ public class FeignController {
     //注意必须有value
     @RequestMapping(value = "feign-consumer",method = RequestMethod.GET)
     public String helloConsumer(){
+
         return helloServceFeign.say();
     }
 
