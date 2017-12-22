@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(value = "hello-service",fallback = FaceBackService.class)
 public interface FeignService {
 
-    @RequestMapping(value = "feigen/say2",method = RequestMethod.GET)
+    @RequestMapping(value = "/feign/say2",method = RequestMethod.GET)
     public String say2();
 
 
