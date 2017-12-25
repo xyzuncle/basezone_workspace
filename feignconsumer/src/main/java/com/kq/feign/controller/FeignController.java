@@ -16,7 +16,6 @@ import java.util.function.Consumer;
 public class FeignController {
 
 
-    @Qualifier("hello-service")
     @Autowired
     FeignService feignService;
 
