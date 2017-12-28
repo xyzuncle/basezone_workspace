@@ -11,6 +11,7 @@
         <module>register</module>
         <module>provider</module>
         <module>apigeteway</module>
+        <module>oauth</module>
 
     </modules>
 
