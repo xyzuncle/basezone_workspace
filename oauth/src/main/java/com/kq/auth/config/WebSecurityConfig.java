@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{//1
 		
 	}
 	
-	@Override
+	/*@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 						.anyRequest().authenticated() //4
@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{//1
                         .csrf().disable(); //6
 		
 
-	}
+	}*/
 
 
 }
