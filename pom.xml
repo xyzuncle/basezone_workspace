@@ -12,6 +12,7 @@
         <module>provider</module>
         <module>apigeteway</module>
         <module>oauth</module>
+        <module>orderservice</module>
 
     </modules>
 
