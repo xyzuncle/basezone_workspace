@@ -14,7 +14,7 @@ import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResour
 
 @SpringBootApplication
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@EnableOAuth2Sso
+@EnableDiscoveryClient
 public class OrderApplication {
     public static void main(String[] args)
     {
