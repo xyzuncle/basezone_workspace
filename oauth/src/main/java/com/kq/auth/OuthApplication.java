@@ -23,6 +23,7 @@ import java.security.Principal;
 
 @SpringBootApplication
 @RestController
+@EnableDiscoveryClient
 public class OuthApplication {
     public static void main(String[] args) {
         SpringApplication.run(OuthApplication.class, args);
