@@ -36,9 +36,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Autowired
+    /*@Autowired
     private UserApprovalHandler userApprovalHandler1;
-
+*/
     /**
      * 设置client 的配置方式，设置client id 和 secret
      * @param clients
