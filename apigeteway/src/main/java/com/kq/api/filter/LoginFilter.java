@@ -44,16 +44,18 @@ public class LoginFilter extends ZuulFilter{
             ctx.setSendZuulResponse(true);
             ctx.setResponseStatusCode(HttpServletResponse.SC_OK);
             ctx.setResponseBody("need login....");
+            System.out.println("需要被登陆");
         }else{
             String token = request.getParameter("access_token");
             if(StringUtils.isNotEmpty(token)){
                 ctx.setSendZuulResponse(true);
                 ctx.setResponseStatusCode(HttpServletResponse.SC_OK);
                 ctx.setResponseBody("token is ok!");
+                System.out.println("token 是好的");
             }else{
                 ctx.setSendZuulResponse(false);
                 ctx.setResponseStatusCode(HttpServletResponse.SC_BAD_REQUEST);
-                ctx.setResponseBody("The times of usage is limited");
+                ctx.setResponseBody("没有token,授信失败");
             }
         }
         return null;
