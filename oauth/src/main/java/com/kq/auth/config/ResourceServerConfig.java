@@ -83,10 +83,20 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .exceptionHandling()
                 .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
                 .and()
-                .authorizeRequests()
-                .anyRequest().authenticated()
+                    .authorizeRequests()
+                    .anyRequest().authenticated()
                 .and()
-                .httpBasic();
+                .httpBasic()
+                .and()
+                    .formLogin() // 通过formLogin的方式定制操作，是不是就是表单方式提交
+                    .loginPage("/login") //定制登录页面的访问地址
+                    .failureUrl("/login?error") // 制定登录失败后的访问地址
+                     // 默认成功后跳转的路径 是根目录，如果不写的话
+                    .defaultSuccessUrl("/home")
+                    .permitAll()
+                .and()
+                    .authorizeRequests()
+                    .antMatchers("/oauth/token").permitAll();
 
     }
 

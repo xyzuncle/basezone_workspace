@@ -5,8 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 import java.rmi.activation.ActivationGroup;
+import java.util.logging.Filter;
 
 @SpringBootApplication
 @EnableZuulProxy
@@ -16,4 +19,6 @@ public class APIApplication {
     public static void main(String[] args) {
         SpringApplication.run(APIApplication.class, args);
     }
+
+
 }
