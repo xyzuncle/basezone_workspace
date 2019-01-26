@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kq.perimission.mapper.PickPerimissionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kq.perimission.domain.PickPerimission">
+        <id column="id" property="id" />
+        <result column="SATELLITE_TYPE" property="satelliteType" />
+        <result column="SATELLITE_NAME" property="satelliteName" />
+        <result column="SENSOR_ID" property="sensorId" />
+        <result column="PRODUCT_LEVLE" property="productLevle" />
+        <result column="SATELLITE_ID" property="satelliteId" />
+        <result column="PICK_NUMBER" property="pickNumber" />
+        <result column="PICK_DAY" property="pickDay" />
+        <result column="PICK_LIMIT_ONE" property="pickLimitOne" />
+        <result column="PICK_LIMIT_TWO" property="pickLimitTwo" />
+        <result column="CRT_TIME" property="crtTime" />
+        <result column="UPT_TIME" property="uptTime" />
+        <result column="GROUP_ID" property="groupId" />
+        <result column="EXPRESS" property="express" />
+        <result column="REMAINING_NUMBER" property="remainingNumber" />
+        <result column="upd_user" property="updUser"/>
+    </resultMap>
+    <delete id="deleteByGroupId" parameterType="String">
+        DELETE FROM pick_perimission WHERE GROUP_ID=#{groupId}
+    </delete>
+
+    <select id="getPickListByGroupId" resultType="com.kq.perimission.domain.PickPerimission">
+
+        SELECT * FROM pick_perimission where GROUP_ID=#{groupId}
+    </select>
+
+</mapper>

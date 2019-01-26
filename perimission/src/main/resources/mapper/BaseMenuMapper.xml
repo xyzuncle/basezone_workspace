@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kq.perimission.mapper.BaseMenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kq.perimission.domain.BaseMenu">
+        <id column="id" property="id" />
+        <result column="code" property="code" />
+        <result column="title" property="title" />
+        <result column="parent_id" property="parentId" />
+        <result column="href" property="href" />
+        <result column="icon" property="icon" />
+        <result column="type" property="type" />
+        <result column="order_num" property="orderNum" />
+        <result column="description" property="description" />
+        <result column="path" property="path" />
+        <result column="enabled" property="enabled" />
+        <result column="crt_time" property="crtTime" />
+        <result column="crt_user" property="crtUser" />
+        <result column="crt_name" property="crtName" />
+        <result column="crt_host" property="crtHost" />
+        <result column="upd_time" property="updTime" />
+        <result column="upd_user" property="updUser" />
+        <result column="upd_name" property="updName" />
+        <result column="upd_host" property="updHost" />
+        <result column="attr1" property="attr1" />
+        <result column="attr2" property="attr2" />
+        <result column="attr3" property="attr3" />
+        <result column="attr4" property="attr4" />
+        <result column="attr5" property="attr5" />
+        <result column="attr6" property="attr6" />
+        <result column="attr7" property="attr7" />
+        <result column="attr8" property="attr8" />
+    </resultMap>
+
+    <resultMap id="parentMap" type="com.kq.perimission.domain.BaseMenu">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+    </resultMap>
+
+
+
+    <select id="getListByParentId" resultType="com.kq.perimission.domain.BaseMenu" resultMap="BaseResultMap" parameterType="String">
+        select id,title,icon,type,order_num,enabled,href,parent_id FROM base_menu where parent_id=#{parentId} ORDER BY order_num
+    </select>
+     <!--根据用户id获取所属组下的菜单，并排序-->
+    <select id="selectAuthorityMenuByUserId" resultMap="BaseResultMap" parameterType="String" resultType="List">
+        SELECT DISTINCT menu.* FROM base_resource_authority m INNER JOIN base_element e
+        ON m.resource_id = e.id
+            AND m.authority_id IN(
+             SELECT group_id FROM base_group_member WHERE user_id = #{userId}
+            )
+            AND m.authority_type = 'group'
+            AND m.resource_type = 'menu'
+        INNER JOIN base_menu menu
+        ON e.menu_id = menu.id
+        ORDER BY menu.order_num
+    </select>
+
+    <select id="queryMenusByUserId" resultType="com.kq.perimission.domain.BaseMenu" parameterType="String">
+      select distinct t.* from base_resource_authority ra
+            inner join base_menu t
+            on ra.resource_id = t.id
+            and ra.authority_id in (
+              select group_id from base_group_member where user_id = #{userId}
+            )
+      and ra.authority_type = 'group'
+      and ra.resource_type = 'menu'
+      AND t.parent_id=#{parentid}
+      order by t.id
+    </select>
+
+    <!--根据用户ID关联获取对应的用户菜单-->
+    <select id="selectMenuByGroupId" resultType="com.kq.perimission.domain.BaseMenu" parameterType="String">
+        SELECT DISTINCT menu.* FROM base_resource_authority  m
+        INNER JOIN base_menu menu
+        ON m.resource_id = menu.id
+        WHERE m.authority_id IN(
+			SELECT group_id FROM base_group_member WHERE user_id = #{userId}
+            )
+            AND m.authority_type = 'group'
+            AND m.resource_type = 'menu'
+        ORDER BY menu.order_num
+    </select>
+
+    <!--根据用户ID关联获取该用户父类ID下的所有菜单  目前前台通过这个方法根据用户获取菜单-->
+    <select id="selectParentMenuByMenuType" resultMap="BaseResultMap" resultType="com.kq.perimission.domain.BaseMenu" parameterType="String">
+        SELECT DISTINCT menu.id  FROM base_resource_authority  m
+        INNER JOIN base_menu menu
+        ON m.resource_id = menu.id
+        WHERE m.authority_id IN(
+			SELECT group_id FROM base_group_member WHERE user_id =#{userId}
+            )
+            AND m.authority_type = 'group'
+            AND m.resource_type = #{menuType}
+	    AND menu.parent_id=#{parentId}
+    </select>
+
+    <!--根据组ID获取该组下的所属权限，这个方法并没有跟用户关联，还需要跟用户关联-->
+    <select id="selectParentMenuByGroupId" resultMap="BaseResultMap" resultType="com.kq.perimission.domain.BaseMenu" parameterType="String">
+        SELECT DISTINCT menu.id  FROM base_resource_authority  m
+        INNER JOIN base_menu menu
+        ON m.resource_id = menu.id
+        WHERE m.authority_id=#{groupId}
+        AND m.authority_type = #{groupType}
+        AND m.resource_type = #{menuType}
+        AND menu.parent_id=#{parentId}
+    </select>
+
+
+    <select id="selectAllMenu" resultType="com.kq.perimission.domain.BaseMenu" parameterType="String">
+        select id,path,title FROM base_menu menu
+        where menu.parent_id=#{parentId}
+        ORDER BY menu.order_num
+    </select>
+
+    <!--目前这个方法是  获取前台菜单 和 后台菜单的所有-->
+    <select id="selectAllMenuByType" resultType="com.kq.perimission.domain.BaseMenu" parameterType="String">
+        select id,path,title FROM base_menu menu
+        where menu.parent_id=#{parentId}
+        and menu.type=#{menuType}
+        ORDER BY menu.order_num
+
+    </select>
+    <!--根据登录用户获取-->
+    <select id="selectFontMenuByUser" resultType="com.kq.perimission.domain.BaseMenu">
+         SELECT DISTINCT menu.id,menu.attr1 FROM base_resource_authority  m
+        INNER JOIN base_menu menu
+        ON m.resource_id = menu.id
+        WHERE m.authority_id=#{groupId}
+        AND m.authority_type = #{groupType}
+        AND m.resource_type = #{menuType}
+        AND menu.parent_id=#{parentId}
+
+    </select>
+    <!--游客获取的前端菜单-->
+    <select id="selectFontMenuByGuest" resultType="com.kq.perimission.domain.BaseMenu" parameterType="String">
+         SELECT DISTINCT menu.id,menu.attr1 FROM base_resource_authority  m
+        INNER JOIN base_menu menu
+        ON m.resource_id = menu.id
+        WHERE m.authority_id=#{groupId}
+        AND m.authority_type = #{groupType}
+        AND m.resource_type = #{menuType}
+        AND menu.parent_id=#{parentId}
+    </select>
+
+
+</mapper>

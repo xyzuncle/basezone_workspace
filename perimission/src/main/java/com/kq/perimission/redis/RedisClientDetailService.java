@@ -109,7 +109,7 @@ public class RedisClientDetailService extends JdbcClientDetailsService {
         }catch (NoSuchClientException e){
             logger.info("clientId:{},{}", clientId, clientId );
         }catch (InvalidClientException e) {
-            // TODO Auto-generated catch block
+            //
             e.printStackTrace();
         }
 

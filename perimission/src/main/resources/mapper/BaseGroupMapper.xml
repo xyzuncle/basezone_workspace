@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kq.perimission.mapper.BaseGroupMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kq.perimission.domain.BaseGroup">
+        <id column="id" property="id" />
+        <result column="code" property="code" />
+        <result column="name" property="name" />
+        <result column="parent_id" property="parentId" />
+        <result column="path" property="path" />
+        <result column="type" property="type" />
+        <result column="group_type" property="groupType" />
+        <result column="description" property="description" />
+        <result column="crt_time" property="crtTime" />
+        <result column="crt_user" property="crtUser" />
+        <result column="crt_name" property="crtName" />
+        <result column="crt_host" property="crtHost" />
+        <result column="upd_time" property="updTime" />
+        <result column="upd_user" property="updUser" />
+        <result column="upd_name" property="updName" />
+        <result column="upd_host" property="updHost" />
+        <result column="attr1" property="attr1" />
+        <result column="attr2" property="attr2" />
+        <result column="attr3" property="attr3" />
+        <result column="attr4" property="attr4" />
+        <result column="attr5" property="attr5" />
+        <result column="attr6" property="attr6" />
+        <result column="attr7" property="attr7" />
+        <result column="attr8" property="attr8" />
+    </resultMap>
+
+
+    <insert id="inserEntity"  parameterType="com.kq.perimission.domain.BaseGroup" useGeneratedKeys="false" keyColumn="id" keyProperty="id">
+
+        INSERT INTO base_group
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            <if test='code!=null and code !=""'>
+                code,
+            </if>
+            <if test='name!=null and name !=""'>
+                name,
+            </if>
+            <if test='parentId!=null and parentId !=""'>
+                parent_id,
+            </if>
+            <if test='path!=null and path !=""'>
+                path,
+            </if>
+            <if test='type!=null and type !=""'>
+                type,
+            </if>
+            <if test='groupType!=null and groupType !=""'>
+                group_type,
+            </if>
+            <if test='description!=null and description !=""'>
+                description,
+            </if>
+            <if test='crtTime!=null and crtTime !=""'>
+                crt_time,
+            </if>
+            <if test='crtUser!=null and crtUser !=""'>
+                crt_user,
+            </if>
+            <if test='crtName!=null and crtName !=""'>
+                crt_name,
+            </if>
+            <if test='crtHost!=null and crtHost !=""'>
+                crt_host,
+            </if>
+            <if test='updTime!=null and updTime !=""'>
+                upd_time,
+            </if>
+            <if test='updUser!=null and updUser !=""'>
+                upd_user,
+            </if>
+            <if test='updName!=null and updName !=""'>
+                upd_name,
+            </if>
+            <if test='updHost!=null and updHost !=""'>
+                upd_name,
+            </if>
+            <if test='attr1!=null and attr1 !=""'>
+                attr1,
+            </if>
+            <if test='attr2!=null and attr2 !=""'>
+                attr2,
+            </if>
+            <if test='attr3 !=null and attr3 !=""'>
+                attr3,
+            </if>
+            <if test='attr4 !=null and attr4 !=""'>
+                attr4,
+            </if>
+            <if test='attr5 !=null and attr5 !=""'>
+                attr5,
+            </if>
+            <if test='attr6 !=null and attr6 !=""'>
+                attr6,
+            </if>
+            <if test='attr7 !=null and attr7 !=""'>
+                attr7,
+            </if>
+            <if test='attr8!=null and attr8 !=""'>
+                attr8,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            #{id},
+            <if test='code!=null and code !=""'>
+                #{code},
+            </if>
+            <if test='name!=null and name !=""'>
+                #{name},
+            </if>
+            <if test='parentId!=null and parentId !=""'>
+               #{parentId},
+            </if>
+            <if test='path!=null and path !=""'>
+                #{path},
+            </if>
+            <if test='type!=null and type !=""'>
+                #{type},
+            </if>
+            <if test='groupType!=null and groupType !=""'>
+                #{groupType},
+            </if>
+            <if test='description!=null and description !=""'>
+                #{description},
+            </if>
+            <if test='crtTime!=null and crtTime !=""'>
+                #{crtTime},
+            </if>
+            <if test='crtUser!=null and crtUser !=""'>
+                #{crtUser},
+            </if>
+            <if test='crtName!=null and crtName !=""'>
+                #{crtName},
+            </if>
+            <if test='crtHost!=null and crtHost !=""'>
+                #{crtHost},
+            </if>
+            <if test='updTime!=null and updTime !=""'>
+                #{updTime},
+            </if>
+            <if test='updUser!=null and updUser !=""'>
+                #{updUser},
+            </if>
+            <if test='updName!=null and updName !=""'>
+                #{updName}
+            </if>
+            <if test='updHost!=null and updHost !=""'>
+                #{updHost}
+            </if>
+            <if test='attr1!=null and attr1 !=""'>
+                #{attr1},
+            </if>
+            <if test='attr2!=null and attr2 !=""'>
+                #{attr2},
+            </if>
+            <if test='attr3 !=null and attr3 !=""'>
+                #{attr3},
+            </if>
+            <if test='attr4 !=null and attr4 !=""'>
+                #{attr4},
+            </if>
+            <if test='attr5 !=null and attr5 !=""'>
+                #{attr5},
+            </if>
+            <if test='attr6 !=null and attr6 !=""'>
+                #{attr6},
+            </if>
+            <if test='attr7 !=null and attr7 !=""'>
+                #{attr7},
+            </if>
+            <if test='attr8!=null and attr8 !=""'>
+                #{attr8},
+            </if>
+        </trim>
+    </insert>
+    <select id="getExistGroup" resultType="java.lang.Integer" parameterType="String">
+        SELECT count(1) FROM base_group  where name=#{groupName}
+    </select>
+
+
+</mapper>

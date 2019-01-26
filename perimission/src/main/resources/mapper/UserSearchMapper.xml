@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kq.perimission.mapper.UserSearchMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kq.perimission.domain.UserSearch">
+        <id column="id" property="id" />
+        <result column="userid" property="userid" />
+        <result column="username" property="username" />
+        <result column="search_key" property="searchKey" />
+        <result column="used" property="used" />
+        <result column="order" property="order" />
+        <result column="crt_time" property="crtTime" />
+        <result column="upd_time" property="updTime" />
+        <result column="attr1" property="attr1" />
+        <result column="attr2" property="attr2" />
+        <result column="attr3" property="attr3" />
+    </resultMap>
+
+    <update id="updateUserdByUserId"  parameterType="string">
+        update user_search SET used=#{num} where id=#{userId}
+    </update>
+
+</mapper>

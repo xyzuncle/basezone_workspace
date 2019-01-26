@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kq.perimission.mapper.BaseUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kq.perimission.domain.BaseUser">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="name" property="name" />
+        <result column="birthday" property="birthday" />
+        <result column="address" property="address" />
+        <result column="mobile_phone" property="mobilePhone" />
+        <result column="tel_phone" property="telPhone" />
+        <result column="email" property="email" />
+        <result column="sex" property="sex" />
+        <result column="type" property="type" />
+        <result column="status" property="status" />
+        <result column="description" property="description" />
+        <result column="crt_time" property="crtTime" />
+        <result column="crt_user" property="crtUser" />
+        <result column="crt_name" property="crtName" />
+        <result column="crt_host" property="crtHost" />
+        <result column="upd_time" property="updTime" />
+        <result column="upd_user" property="updUser" />
+        <result column="upd_name" property="updName" />
+        <result column="upd_host" property="updHost" />
+        <result column="pplappfield" property="pplappfield" />
+        <result column="identify_num" property="identifyNum" />
+        <result column="identify_Type" property="identifyType" />
+        <result column="province" property="province" />
+        <result column="city" property="city" />
+        <result column="unit" property="unit" />
+        <result column="unit_code" property="unitCode" />
+        <result column="idepart_name" property="idepartName" />
+        <result column="verify_user" property="verifyUser" />
+        <result column="verify_status" property="verifyStatus" />
+        <result column="verify_mark" property="verifyMark" />
+        <result column="source" property="source" />
+        <result column="verify_date" property="verifyDate" />
+        <result column="group_id" property="groupId" />
+        <result column="group_name" property="groupName" />
+        <result column="system_type" property="systemType" />
+        <result column="miss_num" property="missNum" />
+        <result column="client_id" property="clientId"/>
+        <result column="satellite_type" property="satelliteType"/>
+    </resultMap>
+
+
+    <!--根据邮箱重置密码-->
+    <update id="resetPwdByEmail" parameterType="string">
+         update base_user SET password=#{pwd} where email=#{email}
+    </update>
+
+
+    <select id="getUserInfoByUserName" resultType="com.kq.perimission.domain.BaseUser" parameterType="String">
+        SELECT id,username,name,birthday,mobile_phone,email,sex,type,status,pplappfield,identify_num,identify_Type,
+        address,province,city,unit,unit_code,group_id,group_name,system_type,idepart_name,verify_user,verify_status,verify_mark
+         FROM base_user t where t.username=#{userName};
+    </select>
+    <select id="getExistUserInfo" resultType="java.lang.Integer" parameterType="String">
+          select count(1) FROM base_user t where t.mobile_phone=#{mobileNum}
+    </select>
+<!--  /*SELECT * FROM base_user WHERE MATCH(mobile_phone,username,idepart_name,name) AGAINST(#{searchKey} IN BOOLEAN MODE);*/-->
+    <select id="getFullTextUser" resultType="com.kq.perimission.domain.BaseUser">
+
+        SELECT * FROM base_user
+        <where>
+            ${ew.sqlSegment}
+        </where>
+
+    </select>
+
+    <select id="getExistEmail" resultType="java.lang.Integer">
+            select count(1) FROM base_user t where t.email=#{email}
+    </select>
+</mapper>

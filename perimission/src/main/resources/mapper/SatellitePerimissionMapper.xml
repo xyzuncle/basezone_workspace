@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kq.perimission.mapper.SatellitePerimissionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kq.perimission.domain.SatellitePerimission">
+        <id column="id" property="id" />
+        <result column="SATELLITE_TYPE" property="satelliteType" />
+        <result column="SENSOR_CONTENT" property="sensorContent" />
+        <result column="SATELLITE_ID" property="satelliteId" />
+        <result column="SATELLITE_NAME" property="satelliteName" />
+        <result column="upd_user" property="updUser" />
+        <result column="crt_time" property="crtTime" />
+        <result column="upd_time" property="updTime" />
+        <result column="launch_time" property="launchTime" />
+        <result column="launch_status" property="launchStatus" />
+        <result column="SENSOR_IDS" property="sensroIds"></result>
+    </resultMap>
+
+</mapper>

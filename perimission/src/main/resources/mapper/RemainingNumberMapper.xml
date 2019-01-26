@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kq.perimission.mapper.RemainingNumberMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kq.perimission.domain.RemainingNumber">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="remaining_number" property="remainingNumber" />
+        <result column="type" property="type" />
+        <result column="business_id" property="businessId" />
+        <result column="crt_time" property="crtTime" />
+        <result column="upd_time" property="updTime" />
+        <result column="total_number" property="totalNumber" />
+        <result column="group_id" property="groupId" />
+        <result column="satellite_type" property="satelliteType" />
+        <result column="sensor_id" property="sensorId" />
+        <result column="product_levle" property="productLevle" />
+        <result column="satellite_id" property="satelliteId" />
+        <result column="satellite_name" property="satelliteName" />
+        <result column="effective_begtin_date" property="effectiveBegtinDate" />
+        <result column="effective_end_date" property="effectiveEndDate" />
+        <result column="product_resolution" property="productResolution" />
+        <result column="pick_number" property="pickNumber" />
+        <result column="pick_day" property="pickDay" />
+        <result column="pick_limit_one" property="pickLimitOne" />
+        <result column="pick_limit_two" property="pickLimitTwo" />
+        <result column="status" property="status" />
+        <result column="origin_time" property="originTime" />
+        <result column="time_infinite_status" property="timeInfiniteStatus"/>
+        <result column="bought_number" property="boughtNumber"/>
+        <result column="effective_year" property="effectiveYear"/>
+        <result column="effective_mouth" property="effectiveMouth"/>
+        <result column="effective_day" property="effectiveDay"/>
+        <result column="upd_user" property="updUser"/>
+    </resultMap>
+
+    <!--根据groupId 批量更新剩余订单数量-->
+    <update id="updateRemaingNumberByGroupId" parameterType="String" >
+        UPDATE REMAINING_NUMBER  set remaining_number=#{num} where group_id=#{groupId}
+    </update>
+    <update id="updateRemaingNumberBybusId">
+          UPDATE  REMAINING_NUMBER  set remaining_number=#{num} where business_id=#{bussinessId}
+    </update>
+
+    <update id="updateSatusByBusId" parameterType="string">
+          UPDATE REMAINING_NUMBER  set status=0 where business_id=#{budId}
+    </update>
+
+    <delete id="deleteByUserId">
+        DELETE FROM REMAINING_NUMBER  WHERE user_id=#{userId}
+    </delete>
+
+</mapper>

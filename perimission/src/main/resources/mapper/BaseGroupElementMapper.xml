@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kq.perimission.mapper.BaseGroupElementMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kq.perimission.domain.BaseGroupElement">
+        <id column="id" property="id" />
+        <result column="group_id" property="groupId" />
+        <result column="user_id" property="userId" />
+        <result column="element_id" property="elementId" />
+        <result column="calls_num" property="callsNum" />
+        <result column="calls_remain_num" property="callsRemainNum" />
+        <result column="calls_frequency" property="callsFrequency" />
+        <result column="ctr_time" property="ctrTime" />
+        <result column="upd_time" property="updTime" />
+        <result column="group_name" property="groupName" />
+        <result column="user_name" property="userName" />
+        <result column="status" property="status" />
+    </resultMap>
+
+</mapper>

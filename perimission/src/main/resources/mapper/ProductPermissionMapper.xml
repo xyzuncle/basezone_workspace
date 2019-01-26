@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kq.perimission.mapper.ProductPermissionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kq.perimission.domain.ProductPermission">
+        <result column="ID" property="id" />
+        <result column="SATELLITE_TYPE" property="satelliteType" />
+        <result column="SENSOR_ID" property="sensorId" />
+        <result column="PRODUCT_LEVLE" property="productLevle" />
+        <result column="SATELLITE_ID" property="satelliteId" />
+        <result column="TOTAL_ORDER_NUMBER" property="totalOrderNumber" />
+        <result column="REMAINING_NUMBER" property="remainingNumber" />
+        <result column="EFFECTIVE_BEGTIN_DATE" property="effectiveBegtinDate" />
+        <result column="EFFECTIVE_END_DATE" property="effectiveEndDate" />
+        <result column="PRODUCT_RESOLUTION" property="productResolution" />
+        <result column="EXPRESS" property="express" />
+        <result column="CRT_TIME" property="crtTime" />
+        <result column="CRT_NAME" property="crtName" />
+        <result column="CRT_HOST" property="crtHost" />
+        <result column="UPT_TIME" property="updTime" />
+        <result column="GROUP_ID" property="groupId"/>
+        <result column="effective_year" property="effectiveYear"/>
+        <result column="getEffective_mouth" property="effectiveMouth"/>
+        <result column="getEffective_day" property="effectiveDay"/>
+        <result column="upd_user" property="updUser"/>
+        <!--时间永久的标志-->
+        <result column="time_infinite_status" property="timeInfiniteStatus"/>
+        <!--卫星名称-->
+        <result column="satellite_name" property="satelliteName"/>
+    </resultMap>
+    <delete id="deleteByGroupId" parameterType="String">
+          DELETE FROM product_permission where GROUP_ID=#{groupId}
+    </delete>
+    <select id="getProductListByGroupId" resultType="com.kq.perimission.domain.ProductPermission">
+
+          SELECT * FROM product_permission where GROUP_ID=#{groupId}
+    </select>
+
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kq.perimission.mapper.TicketsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kq.perimission.domain.Tickets">
+        <id column="id" property="id" />
+        <result column="stub" property="stub" />
+    </resultMap>
+
+    <!--根据应用ID刷新流水号-->
+    <select id="selectSquence" parameterType="string">
+      REPLACE INTO TICKETS(stub)
+      <trim prefix="values (" suffix=")" suffixOverrides="," >
+          #{appId}
+      </trim>
+    </select>
+
+    <!--获取最新插入的ID-->
+    <select id="selectLastId" resultType="java.lang.Integer">
+        SELECT LAST_INSERT_ID()
+    </select>
+
+    <select id="getDateNow" resultType="java.lang.String">
+          SELECT DATE_FORMAT(NOW(), "%Y-%m-%d");
+    </select>
+
+
+</mapper>
