@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kq.auth.mapper.UserClientMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kq.auth.domain.UserClient">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="client_id" property="clientId" />
+        <result column="desc" property="desc" />
+        <result column="ctr_time" property="ctrTime" />
+        <result column="upd_time" property="updTime" />
+        <result column="user_name" property="userName" />
+        <result column="user_token" property="userToken" />
+        <result column="client_secrect" property="clientSecrect" />
+        <result column="scope" property="scope" />
+        <result column="type" property="type" />
+    </resultMap>
+
+    <select id="getClientInfoByUserId" resultType="com.kq.auth.domain.UserClient">
+        select * from user_client u where u.id=#{userId}
+    </select>
+
+
+</mapper>
