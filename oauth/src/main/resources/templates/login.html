@@ -4,6 +4,7 @@
 <meta content="text/html;charset=UTF-8"/>
 <title>登录页面</title>
 <link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
+<script th:src="@{css/resources/plugins/jquery/dist/jquery.min.js}"></script>
 <style type="text/css">
 	body {
   padding-top: 50px;
@@ -35,14 +36,14 @@
        <p th:if="${param.logout}" class="bg-warning">已成功注销</p><!-- 1 参数中带logout的显示此内容 -->
 			<p th:if="${param.error}" class="bg-danger">有错误，请重试</p> <!-- 2 参数带error的显示此内容-->
 			<h2>使用账号密码登录</h2>
-			<form name="form" th:action="@{/uaa/login}" action="/uaa/login" method="post"> <!-- 3 -->
+			<form name="form"  action="/uaa/login"  method="post"> <!-- 3 -->
 				<div class="form-group">
 					<label for="username">账号</label>
-					<input type="text" class="form-control" name="username" value="" placeholder="账号" />
+					<input id="username" type="text" class="form-control" name="username" value="" placeholder="账号" />
 				</div>
 				<div class="form-group">
 					<label for="password">密码</label>
-					<input type="password" class="form-control" name="password" placeholder="密码" />
+					<input id="password" type="password" class="form-control" name="password" placeholder="密码" />
 				</div>
 				<input type="submit" id="login" value="Login" class="btn btn-primary" />
 			</form>
@@ -51,4 +52,34 @@
     </div>
 		
 </body>
+<script type="text/javascript">
+    $(function () {
+        /*$("form").submit(function () {
+            $.ajax( {
+                url: 'http://localhost:8086/oauth/token',
+                type: 'POST',
+                data : {
+                    grant_type : "password",
+                    username : $("#username").val(),
+                    password : $("#password").val()
+                },
+                beforeSend : function( xhr ) {
+                    xhr.setRequestHeader( 'Authorization','Basic '+ "android:android");
+                },
+                success:  function(data, textStatus, jqXHR){
+                    alert(data);
+                },
+                error : function(error) {
+                    alert("1212")
+                    console.log(error);
+                }
+            } );
+        })*/
+
+
+
+
+
+    })
+</script>
 </html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="mainCtrl">
+    <h1>Login</h1>
+    <label>Username</label><input ng-model="data.username"/>
+    <label>Password</label><input type="password" ng-model="data.password"/>
+    <a href="#" ng-click="login()">Login</a>
+</body>
+<script type="text/javascript">
+    var app = angular.module('myApp', ["ngResource","ngRoute","ngCookies"]);
+    app.controller('mainCtrl',
+        function($scope, $resource, $http, $httpParamSerializer, $cookies) {
+
+            $scope.data = {
+                grant_type:"password",
+                username: "",
+                password: "",
+                client_id: "clientIdPassword"
+            };
+            $scope.encoded = btoa("clientIdPassword:secret");
+
+            $scope.login = function() {
+                var req = {
+                    method: 'POST',
+                    url: "http://localhost:8080/spring-security-oauth-server/oauth/token",
+                    headers: {
+                        "Authorization": "Basic " + $scope.encoded,
+                        "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+                    },
+                    data: $httpParamSerializer($scope.data)
+                }
+                $http(req).then(function(data){
+                    $http.defaults.headers.common.Authorization =
+                        'Bearer ' + data.data.access_token;
+                    $cookies.put("access_token", data.data.access_token);
+                    window.location.href="index";
+                });
+            }
+        });
+
+</script>
+</html>

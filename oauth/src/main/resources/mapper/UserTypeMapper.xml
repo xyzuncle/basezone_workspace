@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kq.auth.mapper.UserTypeMapper">
+
+
+
+    <resultMap id="tempMap" type="com.kq.auth.domain.UserTypeDTO">
+        <result column="id" property="id" />
+        <result column="user_types" property="userTypes" />
+    </resultMap>
+
+    <resultMap id="tempMap1" type="com.kq.auth.domain.InstryTypeDTO">
+        <result column="code" property="code" />
+        <result column="name" property="type" />
+    </resultMap>
+
+
+    <select id="getUserTypeMap" resultType="List" resultMap="tempMap">
+        select id,user_types from ZYWX_USER_TYPE_MANAGE
+    </select>
+
+    <select id="getIndustryType" resultType="List" resultMap="tempMap1">
+        select code,name from sys_dictionaries where type="industry"
+    </select>
+
+
+</mapper>

@@ -1,0 +1,19 @@
+<p class="navbar-text navbar-right">{{organization}}</p>
+
+<script type="text/javascript"
+        src="https://cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js">
+</script>
+
+<script>
+    var app = angular.module('myApp', ["ngResource","ngRoute", "ngCookies", "angular-jwt"]);
+
+    app.controller('mainCtrl', function($scope, $cookies, jwtHelper,...) {
+        $scope.organiztion = "";
+
+        function getOrganization(){
+            var token = $cookies.get("access_token");
+            var payload = jwtHelper.decodeToken(token);
+            $scope.organization = payload.organization;
+        }
+...
+    });
